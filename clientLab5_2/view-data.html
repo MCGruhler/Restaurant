@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Data</title>
+    <link rel="stylesheet" href="/client/css/kkstyles1.css">
+    <link rel="stylesheet" href="/client/css/view-data.css">
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="/client/js/view-data.js" async></script>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <div class="header">
+                <h1>Matt's Keto Kitchen</h1>
+            </div>
+            <div class="header-info">
+                <p>123 Main Street, Middletown, NJ &#9702; +1 (732)-555-5555</p>
+            </div>
+        </div>
+        <div class="nav">
+            <a href="/home">Home</a>
+            <a href="/write-data">Enter Data</a>
+            <a href="/view-data">View Data</a>
+            <a href="">Browse Data</a>
+        
+        </div>
+        <div class="body">
+           <table class="table" style="border-collapse: collapse;">
+            <thead>
+                <tr>
+                    <th>Customer Name</th>
+                    <th>Date</th>
+                    <th>Main Dish</th>
+                    <th>Score</th>
+                    <th>Reccomendation</th>
+                </tr>
+            </thead>
+            <tbody id="restaurantTable"></tbody>
+           </table>
+        </div>
+
+    </div>
+</body>
+</html>
