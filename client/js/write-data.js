@@ -33,7 +33,8 @@ function clickSubmitWrite(
       recs: reccomend,
     },
     success: function (response) {
-      console.log(response.msg);
+      let data = JSON.parse(response);
+      console.log(data);
     },
     error: function (response) {
       console.log("error");

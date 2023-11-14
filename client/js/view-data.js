@@ -45,6 +45,7 @@ function showTable() {
     htmlString += "<td>" + jsonObject[i].mainDish + "</td>";
     htmlString += "<td>" + jsonObject[i].score + "</td>";
     htmlString += "<td>" + jsonObject[i].reccomend + "</td>";
+    htmlString += "<td>" + "<button>DELETE</button>" + "</td>";
     htmlString += "</tr>";
   }
 

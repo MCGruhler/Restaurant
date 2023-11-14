@@ -1,11 +1,13 @@
 const fs = require("fs");
 const path = require("path");
 
-const DATABASE_FILE = path.join(__dirname + "./files/data.txt");
+const DATABASE_FILE = path.join(__dirname + "/files/data.txt");
 
 let services = function (app) {
   app.post("/write-record", function (req, res) {
     let id = "res" + Date.now();
+
+    console.log("got to server");
 
     let reviewData = {
       id: id,
