@@ -36,7 +36,7 @@ let jsonObject = [
   },
 ];
 
-function showTable() {
+/*function showTable() {
   let htmlString = "";
   for (let i = 0; i < jsonObject.length; i++) {
     htmlString += "<tr>";
@@ -53,3 +53,32 @@ function showTable() {
 }
 
 showTable();
+*/
+
+function getTable() {
+  $.ajax({
+    url: "http://localhost:4000/read-records",
+    type: "get",
+    success: function (response) {
+      let data = JSON.parse(response);
+      let htmlString = "";
+      for (let i = 0; i < data.length; i++) {
+        htmlString += "<tr>";
+        htmlString += "<td>" + data[i].customerName + "</td>";
+        htmlString += "<td>" + data[i].dateVisited + "</td>";
+        htmlString += "<td>" + data[i].mainDish + "</td>";
+        htmlString += "<td>" + data[i].score + "</td>";
+        htmlString += "<td>" + data[i].reccomend + "</td>";
+        htmlString += "<td>" + "<button>DELETE</button>" + "</td>";
+        htmlString += "</tr>";
+      }
+
+      $("#restaurantTable").html(htmlString);
+    },
+    error: function (response) {
+      console.log("error");
+    },
+  });
+}
+
+getTable();
