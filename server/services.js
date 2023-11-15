@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const glob = require("glob");
 
 const DATABASE_FILE = path.join(__dirname + "/files/data.txt");
 
@@ -59,6 +60,55 @@ let services = function (app) {
       );
     }
   });
+
+  //get
+  app.get("/read-records", function (req, res) {
+    fs.readFile(DATABASE_FILE, "utf8", function (err, data) {
+      if (err) {
+        return res
+          .status(500)
+          .send({ message: "error - internal sever error" });
+      } else {
+        return res.status(200).send(data);
+      }
+    });
+  });
 };
 
 module.exports = services;
+
+/*
+  function readFiles(files, arr, res) {
+    fname = files.pop();
+    if (!fname) return;
+    fs.readFile(fname, "utf8", function (err, data) {
+      if (err) {
+        return res
+          .status(500)
+          .send({ message: "error - internal sever error" });
+      } else {
+        arr.push(JSON.parse(data));
+        if (files.length == 0) {
+          let obj = {};
+          obj.students = arr;
+          return res.status(200).send(obj);
+        } else {
+          readFiles(files, arr, res);
+        }
+      }
+    });
+  }
+  app.get("/read-records", function (req, res) {
+    let obj = {};
+    let arr = [];
+    filesread = 0;
+
+    glob("data.txt", null, function (err, files) {
+      if (err) {
+        return res
+          .status(500)
+          .send({ message: "error - internal sever error" });
+      }
+      readFile(files, [], res);
+    });
+  }); */

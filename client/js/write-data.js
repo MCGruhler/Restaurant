@@ -26,11 +26,11 @@ function clickSubmitWrite(
     url: "http://localhost:4000/write-record",
     type: "post",
     data: {
-      name: customerName,
-      dateV: dateVisited,
-      main: mainDish,
+      customerName: customerName,
+      dateVisited: dateVisited,
+      mainDish: mainDish,
       score: score,
-      recs: reccomend,
+      reccomend: reccomend,
     },
     success: function (response) {
       let data = JSON.parse(response);
@@ -41,3 +41,5 @@ function clickSubmitWrite(
     },
   });
 }
+
+//console.data(restaurantData);
