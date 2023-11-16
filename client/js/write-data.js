@@ -1,7 +1,7 @@
 $("#submit").click(function () {
   let customerName = $("#customerName").val();
   let dateVisited = $("#dateVisited").val();
-  let mainDish = $("#mainDish").val();
+  let mainDish = $("#mainDish option:selected").text();
   let score = $("#score").val();
   let reccomend = $("#reccomend").val();
   clickSubmitWrite(customerName, dateVisited, mainDish, score, reccomend);
