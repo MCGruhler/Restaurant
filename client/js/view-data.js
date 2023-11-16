@@ -1,4 +1,4 @@
-let jsonObject = [
+/*let jsonObject = [
   {
     customerName: "Jessica R",
     dateVisited: "05/15/2023",
@@ -34,10 +34,12 @@ let jsonObject = [
     score: "2",
     reccomend: "No",
   },
-];
+];*/
 
-/*function showTable() {
+function showTable(jsonObject) {
   let htmlString = "";
+  console.log(jsonObject);
+
   for (let i = 0; i < jsonObject.length; i++) {
     htmlString += "<tr>";
     htmlString += "<td>" + jsonObject[i].customerName + "</td>";
@@ -52,28 +54,15 @@ let jsonObject = [
   $("#restaurantTable").html(htmlString);
 }
 
-showTable();
-*/
-
-function getTable() {
+function getRestaurantData() {
   $.ajax({
     url: "http://localhost:4000/read-records",
     type: "get",
     success: function (response) {
       let data = JSON.parse(response);
-      let htmlString = "";
-      for (let i = 0; i < data.length; i++) {
-        htmlString += "<tr>";
-        htmlString += "<td>" + data[i].customerName + "</td>";
-        htmlString += "<td>" + data[i].dateVisited + "</td>";
-        htmlString += "<td>" + data[i].mainDish + "</td>";
-        htmlString += "<td>" + data[i].score + "</td>";
-        htmlString += "<td>" + data[i].reccomend + "</td>";
-        htmlString += "<td>" + "<button>DELETE</button>" + "</td>";
-        htmlString += "</tr>";
-      }
-
-      $("#restaurantTable").html(htmlString);
+      data = JSON.parse(data.restaurantData);
+      console.log(data);
+      showTable(data);
     },
     error: function (response) {
       console.log("error");
@@ -81,4 +70,4 @@ function getTable() {
   });
 }
 
-getTable();
+getRestaurantData();
