@@ -65,11 +65,11 @@ let services = function (app) {
   app.get("/read-records", function (req, res) {
     fs.readFile(DATABASE_FILE, "utf8", function (err, data) {
       if (err) {
-        return res
-          .status(500)
-          .send({ message: "error - internal sever error" });
+        return res.status(500).send(JSON.stringify({ message: err }));
       } else {
-        return res.status(200).send(data);
+        return res
+          .status(200)
+          .send(JSON.stringify({ message: "SUCCESS", restaurantData: data }));
       }
     });
   });
