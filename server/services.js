@@ -75,20 +75,34 @@ let services = function (app) {
   });
 
   //delete
-  app.delete("/delete-records/:id", function (req, res) {
-    let id = req.params.id;
-    let fileName = DATABASE_FILE + "/" + id + ".json";
+  app.delete("/delete-records", function (req, res) {
+    let id = req.body.id;
 
-    fs.unlink(fileName, function (err) {
-      let rsp_obj = {};
+    let restaurantData = [];
+
+    //read in current database
+    fs.readFile(DATABASE_FILE, "utf-8", function (err, data) {
       if (err) {
-        rsp_obj.id = id;
-        rsp_obj.message = "error" + err;
-        return res.status(404).send(rsp_obj);
+        res.send(JSON.stringify({ msg: err }));
       } else {
-        rsp_obj.id = id;
-        rsp_obj.message = "record deleted";
-        return res.status(200).send(rsp_obj);
+        restaurantData = JSON.parse(data);
+        for (let i = 0; i < restaurantData.length; i++) {
+          if ((restaurantData[i].id = id)) {
+            restaurantData = restaurantData.splice(i - 1, i);
+          }
+        }
+
+        fs.writeFile(
+          DATABASE_FILE,
+          JSON.stringify(restaurantData),
+          function (err) {
+            if (err) {
+              res.send(JSON.stringify({ msg: err }));
+            } else {
+              res.send(JSON.stringify({ msg: "deleted" }));
+            }
+          }
+        );
       }
     });
   });

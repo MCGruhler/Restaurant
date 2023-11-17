@@ -19,6 +19,7 @@ function showTable(jsonObject) {
   }
 
   $("#restaurantTable").html(htmlString);
+  activateBtns();
 }
 
 function getRestaurantData() {
@@ -39,10 +40,11 @@ function getRestaurantData() {
 
 function deleteRestaurantData(id) {
   $.ajax({
-    url: "http://localhost:4000/delete-records/:" + id,
+    url: "http://localhost:4000/delete-records",
     type: "delete",
+    data: { id: id },
     success: function (response) {
-      console.log(id + " was deleted.");
+      console.log("Data was deleted.");
     },
     error: function (err) {
       console.log(err);
@@ -53,10 +55,10 @@ function deleteRestaurantData(id) {
 getRestaurantData();
 
 //delete button click
-setTimeout(function () {
+function activateBtns() {
   $(".btn").click(function () {
     console.log("im here");
     let deleteId = this.getAttribute("id");
     deleteRestaurantData(deleteId);
   });
-}, 100);
+}
