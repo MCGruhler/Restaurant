@@ -1,6 +1,5 @@
 function showTable(jsonObject) {
   let htmlString = "";
-  console.log(jsonObject);
 
   for (let i = 0; i < jsonObject.length; i++) {
     htmlString += "<tr>";
@@ -39,12 +38,14 @@ function getRestaurantData() {
 }
 
 function deleteRestaurantData(id) {
+  console.log("in ajax func");
   $.ajax({
     url: "http://localhost:4000/delete-records",
     type: "delete",
     data: { id: id },
     success: function (response) {
       console.log("Data was deleted.");
+      getRestaurantData();
     },
     error: function (err) {
       console.log(err);
