@@ -8,8 +8,6 @@ let services = function (app) {
   app.post("/write-record", function (req, res) {
     let id = "res" + Date.now();
 
-    console.log("got to server");
-
     let reviewData = {
       id: id,
       customerName: req.body.customerName,
@@ -87,8 +85,8 @@ let services = function (app) {
       } else {
         restaurantData = JSON.parse(data);
         for (let i = 0; i < restaurantData.length; i++) {
-          if ((restaurantData[i].id = id)) {
-            restaurantData = restaurantData.splice(i - 1, i);
+          if (restaurantData[i].id == id) {
+            restaurantData.splice(i, 1);
           }
         }
 
