@@ -73,42 +73,25 @@ let services = function (app) {
       }
     });
   });
+
+  //delete
+  app.delete("/delete-records/:id", function (req, res) {
+    let id = req.params.id;
+    let fileName = DATABASE_FILE + "/" + id + ".json";
+
+    fs.unlink(fileName, function (err) {
+      let rsp_obj = {};
+      if (err) {
+        rsp_obj.id = id;
+        rsp_obj.message = "error" + err;
+        return res.status(404).send(rsp_obj);
+      } else {
+        rsp_obj.id = id;
+        rsp_obj.message = "record deleted";
+        return res.status(200).send(rsp_obj);
+      }
+    });
+  });
 };
 
 module.exports = services;
-
-/*
-  function readFiles(files, arr, res) {
-    fname = files.pop();
-    if (!fname) return;
-    fs.readFile(fname, "utf8", function (err, data) {
-      if (err) {
-        return res
-          .status(500)
-          .send({ message: "error - internal sever error" });
-      } else {
-        arr.push(JSON.parse(data));
-        if (files.length == 0) {
-          let obj = {};
-          obj.students = arr;
-          return res.status(200).send(obj);
-        } else {
-          readFiles(files, arr, res);
-        }
-      }
-    });
-  }
-  app.get("/read-records", function (req, res) {
-    let obj = {};
-    let arr = [];
-    filesread = 0;
-
-    glob("data.txt", null, function (err, files) {
-      if (err) {
-        return res
-          .status(500)
-          .send({ message: "error - internal sever error" });
-      }
-      readFile(files, [], res);
-    });
-  }); */
