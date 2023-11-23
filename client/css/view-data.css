@@ -1,16 +1,43 @@
 .table {
-    background-color: bisque;
-    width: 50vw;
+    background-color:rgb(113, 121, 126);
+    width: 75vw;
+
+    margin-top: 15vh;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+
 }
 
 .table > thead {
-    background-color: black;
-    color: whitesmoke;
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: rgb(83, 112, 72);
+    color: white;
+    font-family: "Courier New", monospace;
+
+    line-height: 2;
 
 }
 
 .table > tbody > tr > td{
     line-height: 2;
-    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-family: "Courier New", monospace;
+    color: white;
+}
+
+#deleteRev{
+    background: url(../images/trash-can-outline.svg) no-repeat center;
+    background-size:contain;
+}
+
+
+.btn{
+    width: 100%;
+    font-size: 16px;
+    border-radius: 20px;
+    border: none;
+    color: white;
+    background-color: rgb(83, 112, 72);
+    font-family: 'Courier New', Courier, monospace;
+}
+.btn:hover{
+    background-color: red;
 }

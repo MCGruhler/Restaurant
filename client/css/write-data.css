@@ -1,9 +1,13 @@
 form{
-    background-color: bisque;
-    width: 40vw;
-    height: 250px;
+    margin-top: 15vh;
 
-    font-family: Arial, Helvetica, sans-serif;
+
+    background-color: rgb(113,121,126);
+    width: 50%;
+    height: 30vh;
+
+    border-radius: 25px;
+    font-family: "Courier New", monospace;
 
     display: flex;
     flex-direction: column;
@@ -14,8 +18,9 @@ form{
 }
 
 .form-group, .button-container{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Courier New", monospace;
     padding: 1vh;
+    color: white;
   
 }
 
@@ -25,9 +30,9 @@ form{
 }
 
 #submit, #clear{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Courier New", monospace;
     background-color: black;
-    color: whitesmoke;
+    color: white;
     border-radius: 20px;
     height: 30px;
     width: 75px;
@@ -35,6 +40,14 @@ form{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+#submit:hover{
+    background-color: rgb(83, 112, 72);
+}
+
+#clear:hover{
+    background-color: rgb(70,130,180);
 }
 
 fieldset, legend{
