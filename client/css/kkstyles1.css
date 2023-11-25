@@ -61,7 +61,7 @@ body{
 
 .nav > a:hover{
     background-color: white;
-    color: white;
+    color: rgb(83, 112, 72);
     font-weight: bolder;
 }
 
