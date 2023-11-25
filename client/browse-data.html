@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/client/css/browse-data.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
-    <script src="/client/js/browse-data.js" async></script>
+    <script src="/client/js/browse-data.js"></script>
 </head>
 <body>
     <div class="container">
@@ -28,7 +28,7 @@
         </div>
     </div>
     <div class="body">
-        <div class="flexContainer" data-ng-app="browseDataApp" data-ng-contoller="browseDataCtrl">
+        <div class="flexContainer" data-ng-app="browseDataApp" data-ng-controller="browseDataCtrl">
             <div>
                 <label for="customerName">Customer Name: </label>
                 <label id="customerName">{{resData.customerName}}</label>
