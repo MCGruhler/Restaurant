@@ -7,6 +7,9 @@ console.log("im in js file");
 app.controller("browseDataCtrl", function ($scope, $http) {
   console.log("im in ctrler");
   $scope.resData = {};
+  $scope.reviews = {};
+  $scope.reviews.current = currentRev + 1;
+
   $scope.get_reviews = function () {
     $http({
       method: "get",
@@ -15,6 +18,7 @@ app.controller("browseDataCtrl", function ($scope, $http) {
       if (response.data.message === "SUCCESS") {
         restaurantData = JSON.parse(response.data.restaurantData);
         $scope.resData = restaurantData[currentRev];
+        $scope.reviews.total = restaurantData.length;
         console.log($scope.resData);
       } else {
         console.log(response.data.message);
@@ -34,5 +38,6 @@ app.controller("browseDataCtrl", function ($scope, $http) {
       currentRev = 0;
     }
     $scope.resData = restaurantData[currentRev];
+    $scope.reviews.current = currentRev + 1;
   };
 });
