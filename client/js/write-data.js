@@ -1,3 +1,37 @@
+let app = angular.module("writeDataApp", []);
+
+app.controller("writeDataCtrl", function ($scope, $http) {
+  console.log("im in controller");
+  $scope.clickSubmitWrite = function () {
+    let customerName = this.customerName;
+    let dateVisited = this.date;
+    let mainDish = this.mainDish;
+    let score = this.score;
+    let reccomend = this.reccomend;
+
+    $http({
+      method: "post",
+      url: "http://localhost:4000/write-record",
+      data: {
+        customerName: customerName,
+        dateVisited: dateVisited,
+        mainDish: mainDish,
+        score: score,
+        reccomend: reccomend,
+      },
+    }).then(
+      function (response) {
+        console.log(response.data);
+      },
+      function (response) {
+        console.log(response);
+      }
+    );
+  };
+});
+
+/*
+
 $("#submit").click(function () {
   let customerName = $("#customerName").val();
   let dateVisited = $("#dateVisited").val();
@@ -14,6 +48,7 @@ $("#clear").click(function () {
   $("#score").val("");
   $("#reccomend").val("");
 });
+
 
 function clickSubmitWrite(
   customerName,
@@ -43,3 +78,23 @@ function clickSubmitWrite(
 }
 
 //console.data(restaurantData);
+
+$http({
+  method: "post",
+  url: "http://localhost:4000/write-record",
+  data: {
+    customerName: customerName,
+    dateVisited: dateVisited,
+    mainDish: mainDish,
+    score: score,
+    reccomend: reccomend,
+  },
+}).then(
+  function (response) {
+    console.log(response.data);
+  },
+  function (response) {
+    console.log(response);
+  }
+);
+*/
