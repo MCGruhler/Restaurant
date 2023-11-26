@@ -10,6 +10,8 @@ app.controller("writeDataCtrl", function ($scope, $http) {
     let score = this.score;
     let reccomend = this.reccomend;
 
+    $scope.clearWrite();
+
     $http({
       method: "post",
       url: "http://localhost:4000/write-record",
