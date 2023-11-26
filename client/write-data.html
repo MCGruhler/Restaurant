@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="/client/css/write-data.css">
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/client/js/write-data.js" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/client/js/write-data.js"></script>
 </head>
 <body>
     <div class="container">
@@ -29,19 +29,19 @@
             <a href="/browse-data">Browse Data</a>
         
         </div>
-        <div class="body">
+        <div class="body" data-ng-app="writeDataApp" data-ng-controller="writeDataCtrl">
             <form>
                 <div class="form-group">
                     <label for="input1" id="input1">Customer Name</label>
-                    <input class="form-control" name="customerName" id="customerName">
+                    <input class="form-control" name="customerName" id="customerName" data-ng-model="customerName">
                 </div>
                 <div class="form-group">
                     <label for="input2" id="input2">Date Visited</label>
-                    <input class="form-control" name="dateVisited" id="dateVisited" type="date">
+                    <input class="form-control" name="dateVisited" id="dateVisited" type="date" data-ng-model="date">
                 </div>
                 <div class="form-group">
                     <label for="input3" id="input3">Main Dish</label>
-                        <select name="mainDish" id="mainDish">
+                        <select name="mainDish" id="mainDish" data-ng-model="mainDish">
                         <option value="ketoBurger">Keto Burger</option>
                         <option value="chikSalad">Grilled Chicken Salad</option>
                         <option value="ribeye">Ribeye Steak</option>
@@ -53,7 +53,7 @@
                 </div>
                 <div class="form-group">
                     <label for="input4" id="input4">Score: </label>
-                    <select name="input4" id="score">
+                    <select name="input4" id="score" data-ng-model="score">
                         <option value="5">5</option>
                         <option value="4">4</option>
                         <option value="3">3</option>
@@ -63,7 +63,7 @@
                 </div>
                 <div class="form-group">
                     <label for="input5" id="input4">Would you Reccomend?</label>
-                    <select name="input5" id="reccomend">
+                    <select name="input5" id="reccomend" data-ng-model="reccomend">
                         <option value="Yes">Yes</option>
                         <option value="Maybe">Maybe</option>
                         <option value="No">No</option>
@@ -71,10 +71,10 @@
                 </div>
                 <div class="button-container">
                     <div class="config-buttons">
-                        <div id="submit" class ="edit_btn" >Submit</div>
+                        <div id="submit" class ="edit_btn" data-ng-click="clickSubmitWrite()">Submit</div>
                     </div>
                     <div class="config-buttons">
-                        <div id="clear" class ="edit_btn">Clear</div>
+                        <div id="clear" class ="edit_btn" data-ng-click="clearWrite">Clear</div>
                     </div>
                 </div>
             </form>
