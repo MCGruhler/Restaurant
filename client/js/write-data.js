@@ -2,9 +2,10 @@ let app = angular.module("writeDataApp", []);
 
 app.controller("writeDataCtrl", function ($scope, $http) {
   console.log("im in controller");
+
   $scope.clickSubmitWrite = function () {
     let customerName = this.customerName;
-    let dateVisited = this.date;
+    let dateVisited = this.date.toLocaleDateString();
     let mainDish = this.mainDish;
     let score = this.score;
     let reccomend = this.reccomend;
@@ -27,6 +28,14 @@ app.controller("writeDataCtrl", function ($scope, $http) {
         console.log(response);
       }
     );
+  };
+
+  $scope.clearWrite = function () {
+    $scope.customerName = "";
+    $scope.date = "";
+    $scope.mainDish = "";
+    $scope.score = "";
+    $scope.reccomend = "";
   };
 });
 
