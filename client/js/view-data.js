@@ -27,7 +27,7 @@ function getRestaurantData() {
     type: "get",
     success: function (response) {
       let data = JSON.parse(response);
-      data = JSON.parse(data.restaurantData);
+      data = data.restaurantData;
       console.log(data);
       showTable(data);
     },
@@ -59,7 +59,9 @@ getRestaurantData();
 function activateBtns() {
   $(".btn").click(function () {
     console.log("im here");
-    let deleteId = this.getAttribute("id");
+    let deleteId = this.getAttribute("_id");
+
+    console.log(this);
     deleteRestaurantData(deleteId);
   });
 }
