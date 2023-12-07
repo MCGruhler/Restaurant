@@ -15,8 +15,8 @@ app.controller("browseDataCtrl", function ($scope, $http) {
       method: "get",
       url: "http://localhost:4000/read-records",
     }).then(function (response) {
-      if (response.data.message === "SUCCESS") {
-        restaurantData = JSON.parse(response.data.restaurantData);
+      if (response.data.msg === "SUCCESS") {
+        restaurantData = response.data.restaurantData;
         $scope.resData = restaurantData[currentRev];
         $scope.reviews.total = restaurantData.length;
         console.log($scope.resData);

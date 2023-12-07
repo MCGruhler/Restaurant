@@ -2,6 +2,12 @@ const fs = require("fs");
 const path = require("path");
 const glob = require("glob");
 
+const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectId;
+
+//database url
+let dbURL = "mongodb://localhost";
+
 const DATABASE_FILE = path.join(__dirname + "/files/data.txt");
 
 let services = function (app) {
@@ -19,90 +25,87 @@ let services = function (app) {
 
     let restaurantData = [];
 
-    if (fs.existsSync(DATABASE_FILE)) {
-      //read in current database
-      fs.readFile(DATABASE_FILE, "utf-8", function (err, data) {
+    MongoClient.connect(
+      dbURL,
+      { useUnifiedTopology: true },
+      function (err, client) {
         if (err) {
-          res.send(JSON.stringify({ msg: err }));
+          return res.status(201).send(JSON.stringify({ msg: err }));
         } else {
-          restaurantData = JSON.parse(data);
+          let dbo = client.db("restaurantReviews");
 
-          restaurantData.push(reviewData);
-
-          fs.writeFile(
-            DATABASE_FILE,
-            JSON.stringify(restaurantData),
-            function (err) {
+          dbo
+            .collection("restaurantData")
+            .insertOne(reviewData, function (err) {
               if (err) {
-                res.send(JSON.stringify({ msg: err }));
+                return res.status(201).send(JSON.stringify({ msg: err }));
               } else {
-                res.send(JSON.stringify({ msg: "SUCCESS" }));
+                return res.status(200).send(JSON.stringify({ msg: "SUCCESS" }));
               }
-            }
-          );
+            });
         }
-      });
-    } else {
-      restaurantData.push(reviewData);
-
-      fs.writeFile(
-        DATABASE_FILE,
-        JSON.stringify(restaurantData),
-        function (err) {
-          if (err) {
-            res.send(JSON.stringify({ msg: err }));
-          } else {
-            res.send(JSON.stringify({ msg: "SUCCESS" }));
-          }
-        }
-      );
-    }
+      }
+    );
   });
 
   //get
   app.get("/read-records", function (req, res) {
-    fs.readFile(DATABASE_FILE, "utf8", function (err, data) {
-      if (err) {
-        return res.status(500).send(JSON.stringify({ message: err }));
-      } else {
-        return res
-          .status(200)
-          .send(JSON.stringify({ message: "SUCCESS", restaurantData: data }));
+    MongoClient.connect(
+      dbURL,
+      { useUnifiedTopology: true },
+      function (err, client) {
+        if (err) {
+          return res.status(201).send(JSON.stringify({ msg: err }));
+        } else {
+          let dbo = client.db("restaurantReviews");
+          dbo
+            .collection("restaurantData")
+            .find()
+            .toArray(function (err, data) {
+              if (err) {
+                return res.status(201).send(JSON.stringify({ msg: err }));
+              } else {
+                return res
+                  .status(200)
+                  .send(
+                    JSON.stringify({ msg: "SUCCESS", restaurantData: data })
+                  );
+              }
+            });
+        }
       }
-    });
+    );
   });
 
   //delete
   app.delete("/delete-records", function (req, res) {
-    let id = req.body.id;
+    let id = req.query;
+    console.log(req);
 
-    let restaurantData = [];
+    //let del_id = new ObjectId(id);
+    //console.log(id);
+    console.log("got here in delete");
+    let search = { id: id };
+    console.log(search);
 
-    //read in current database
-    fs.readFile(DATABASE_FILE, "utf-8", function (err, data) {
-      if (err) {
-        res.send(JSON.stringify({ msg: err }));
-      } else {
-        restaurantData = JSON.parse(data);
-        for (let i = 0; i < restaurantData.length; i++) {
-          if (restaurantData[i].id == id) {
-            restaurantData.splice(i, 1);
-          }
-        }
-
-        fs.writeFile(
-          DATABASE_FILE,
-          JSON.stringify(restaurantData),
-          function (err) {
+    MongoClient.connect(
+      dbURL,
+      { useUnifiedTopology: true },
+      function (err, client) {
+        if (err) {
+          return res.status(201).send(JSON.stringify({ msg: err }));
+        } else {
+          let dbo = client.db("restaurantReviews");
+          dbo.collection("restaurantData").deleteOne(search, function (err) {
             if (err) {
-              res.send(JSON.stringify({ msg: err }));
+              return res.status(201).send(JSON.stringify({ msg: err }));
             } else {
-              res.send(JSON.stringify({ msg: "deleted" }));
+              return res.status(200).send(JSON.stringify({ msg: "SUCCESS" }));
             }
-          }
-        );
+          });
+        }
       }
-    });
+    );
   });
 };
 
