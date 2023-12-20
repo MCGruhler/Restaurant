@@ -9,10 +9,10 @@
     <link rel="stylesheet" href="/client/css/view-data.css">
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="/client/js/view-data.js" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="/client/js/view-data.js"></script>
 </head>
-<body>
+<body data-ng-app="viewDataApp" data-ng-controller="viewDataCtrl" data-ng-init="hideForm=true">
     <div class="container">
         <div class="header-container">
             <div class="header">
@@ -29,22 +29,105 @@
             <a href="/browse-data">Browse Data</a>
         
         </div>
-        <div class="body">
-           <table class="table" style="border-collapse: collapse;">
-            <thead>
-                <tr>
-                    <th>Customer Name</th>
-                    <th>Date</th>
-                    <th>Main Dish</th>
-                    <th>Score</th>
-                    <th>Reccomendation</th>
-                    <th id="deleteRev"></th>
-                </tr>
-            </thead>
-            <tbody id="restaurantTable"></tbody>
-           </table>
+
+        <div>
+            <label for="groupby">Score: </label>
+            <select id="groupby" 
+                data-ng-model="selectedScore" 
+                data-ng-options="score.display for score in scores" 
+                data-ng-change="redrawTable()">
+            </select>
         </div>
 
+
+
+        <section data-ng-hide="hideTable">
+            <div class="body">
+               <table class="table" style="border-collapse: collapse;">
+                    <tr>
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>Main Dish</th>
+                        <th>Score</th>
+                        <th>Reccomendation</th>
+                        <th id="deleteRev"></th>
+                        <th id="editRev"></th>
+                    </tr>
+                    <tr data-ng-repeat="obj in revs">
+                        <td>{{obj.customerName}}</td>
+                        <td>{{obj.dateVisited}}</td>
+                        <td>{{obj.mainDish}}</td>
+                        <td>{{obj.score}}</td>
+                        <td>{{obj.reccomend}}</td>
+                        <td>
+                            <button data-ng-click="deleteRev(obj['_id'])"><Datag>DELETE</Datag></button>
+                        </td>
+                        <td>
+                            <button data-ng-click="editRev($index)">EDIT</button>
+                          </td>
+                    </tr>
+            
+               </table>
+        
+            </div>
+        </section>
+
+        <section data-ng-hide="hideForm">
+            <label data-ng-model="revID" hidden></label>
+
+            <div>
+                <label for="customerName">Customer Name </label>
+                <input type="text" id="customerName" data-ng-model="customerName" data-ng-change=startNew()>
+              </div>
+        
+              <div>
+                <label for="dateVisited">Date Visited </label>
+                <input type="text" id="dateVisited" data-ng-model="dateVisited" data-ng-change=startNew()>
+              </div>
+        
+              <div>
+                <label for="mainDish">Main Dish </label>
+                <select name="mainDish" id="mainDish" data-ng-model="mainDish" data-ng-change=startNew() >
+                <option>Keto Burger</option>
+                <option>Grilled Chicken Salad</option>
+                <option>Ribeye Steak</option>
+                <option>Tuna Steak</option>
+                <option>Grilled Salmon</option>
+                <option>Eggplant Parmesan</option>
+                <option>Zoodles and Meatballs</option>
+                </select>
+              </div>
+        
+              <div>
+                <label for="score">Score </label>
+                <select name="score" id="score" data-ng-model="score" data-ng-change=startNew()>
+                    <option value="5">5</option>
+                    <option value="4">4</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1">1</option>
+                    </select>
+              </div>
+
+              <div>
+                <label for="reccomend">Would you Reccomend? </label>
+                <select name="reccomend" id="reccomend" data-ng-model="reccomend" data-ng-change=startNew()>
+                    <option value="Yes">Yes</option>
+                    <option value="Maybe">Maybe</option>
+                    <option value="No">No</option>
+                    </select>
+              </div>
+        
+              <div>
+                <button id="submit" data-ng-click="updateRev()">Update</button>
+              </div>
+      
+              <div>
+                <button id="cancelButton" data-ng-click="cancelUpdate()">Cancel</button>
+              </div>
+
+              <div>{{addResults}}</div>
+        </section>
     </div>
 </body>
 </html>
