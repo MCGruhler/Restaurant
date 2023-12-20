@@ -99,11 +99,6 @@ app.controller("viewDataCtrl", function ($scope, $http) {
       $scope.reccomend == ""
     ) {
       $scope.addResults = "All input fields are required";
-      console.log($scope.customerName);
-      console.log($scope.dateVisited);
-      console.log($scope.score);
-      console.log($scope.mainDish);
-      console.log($scope.reccomend);
       console.log("stuck here");
       return;
     }
