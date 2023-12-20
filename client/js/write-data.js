@@ -24,7 +24,7 @@ app.controller("writeDataCtrl", function ($scope, $http) {
       },
     }).then(
       function (response) {
-        console.log(response.data);
+        console.log(response);
       },
       function (response) {
         console.log(response);
