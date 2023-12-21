@@ -1,4 +1,4 @@
-form{
+form, .hiddenFlexForm{
     margin-top: 15vh;
 
 
@@ -29,7 +29,7 @@ form{
     gap: 10px;
 }
 
-#submit, #clear{
+#submit, #clear, #cancelButton{
     font-family: "Courier New", monospace;
     background-color: black;
     color: white;
@@ -40,13 +40,14 @@ form{
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 0;
 }
 
 #submit:hover{
     background-color: rgb(83, 112, 72);
 }
 
-#clear:hover{
+#clear:hover, #cancelButton:hover{
     background-color: rgb(70,130,180);
 }
 
