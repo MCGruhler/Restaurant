@@ -2,7 +2,7 @@
     background-color:rgb(113, 121, 126);
     width: 75vw;
 
-    margin-top: 15vh;
+
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 
 }
@@ -27,7 +27,10 @@
     background: url(../images/trash-can-outline.svg) no-repeat center;
     background-size:contain;
 }
-
+#editRev{
+    background: url(../images/pencil-box-outline.svg) no-repeat center;
+    background-size:contain;
+}
 
 .btn{
     width: 100%;
@@ -40,4 +43,24 @@
 }
 .btn:hover{
     background-color: red;
+}
+
+
+#selectScore{
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(83, 112, 72);
+    margin-top: 2vh;
+}
+
+#selectScore > select{
+    font-weight: bold;
+    color: white;
+    font-family: 'Courier New', Courier, monospace;
+    background-color: rgb(83, 112, 72);
+}
+
+.addResults{
+    color: white;
+    font-weight: bold;
 }
