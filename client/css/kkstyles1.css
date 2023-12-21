@@ -65,7 +65,7 @@ body{
     font-weight: bolder;
 }
 
-.body{
+.body, .hiddenBody{
     background-image: url("../images/backgroundImg-kitchen.png");
     background-repeat: no-repeat;
     background-size: cover;
@@ -73,8 +73,10 @@ body{
     width: 100vw;
 
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: flex-start;
+    align-items: center;
+    flex-direction: column;
+    gap: 2vh;
 }
 
 .content{
